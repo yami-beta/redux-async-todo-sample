@@ -1,21 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import todoAppReducers from './reducers';
-import VisibleTodoList from './containers/VisibleTodoList';
+import { AppContainer } from 'react-hot-loader';
+import App from './containers/App';
 
-let store = createStore(todoAppReducers);
-
-const App = (props) => {
-  return (
-    <VisibleTodoList />
+const AppRender = () => {
+  const rootEl = document.getElementById('wrapper');
+  ReactDOM.render(
+    <AppContainer>
+      <App />
+    </AppContainer>,
+    rootEl
   );
 };
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('wrapper')
-);
+AppRender();
+
+if (module.hot) {
+  module.hot.accept('./containers/App', () => { AppRender() });
+}

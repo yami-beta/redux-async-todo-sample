@@ -4,7 +4,7 @@ const path = require('path');
 
 let entry = {};
 glob.sync('./src/index.js').forEach(function (file) {
-  entry[path.basename(file, '.js')] = file;
+  entry[path.basename(file, '.js')] = [file];
 });
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        loaders: ['babel-loader'],
         exclude: /node_modules/,
       }
     ],
