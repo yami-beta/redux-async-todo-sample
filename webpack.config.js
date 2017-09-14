@@ -4,7 +4,7 @@ const path = require('path');
 
 let entry = {};
 glob.sync('./src/index.js').forEach(function (file) {
-  entry[path.basename(file, '.js')] = [file];
+  entry[path.basename(file, '.js')] = ['react-hot-loader/patch', file];
 });
 
 module.exports = {

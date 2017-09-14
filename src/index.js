@@ -2,12 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from './containers/App';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import todoAppReducers from './reducers';
+
+const store = createStore(todoAppReducers);
 
 const AppRender = () => {
   const rootEl = document.getElementById('wrapper');
   ReactDOM.render(
     <AppContainer>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </AppContainer>,
     rootEl
   );
@@ -17,4 +24,8 @@ AppRender();
 
 if (module.hot) {
   module.hot.accept('./containers/App', () => { AppRender() });
+  module.hot.accept('./reducers', () => {
+    const nextReducer = require('./reducers').default;
+    store.replaceReducer(nextReducer);
+  });
 }
