@@ -25,7 +25,6 @@ AppRender();
 if (module.hot) {
   module.hot.accept('./containers/App', () => { AppRender() });
   module.hot.accept('./reducers', () => {
-    const nextReducer = require('./reducers').default;
-    store.replaceReducer(nextReducer);
+    store.replaceReducer(todoAppReducers);
   });
 }

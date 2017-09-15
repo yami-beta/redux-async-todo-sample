@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import TodoList from '../components/TodoList';
+import { TodoAction } from '../actions';
 
 const mapStateToProp = ({ todos }) => {
   return { todos };
 };
 
 const mapDispatchToProp = (dispatch) => {
-  return {};
+  return {
+    todoAction: new TodoAction(dispatch),
+  };
 };
 
 const VisibleTodoList = connect(mapStateToProp, mapDispatchToProp)(TodoList);

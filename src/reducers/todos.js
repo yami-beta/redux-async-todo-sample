@@ -4,8 +4,23 @@ const initialState = [
 
 const todos = (state = initialState, action) => {
   switch(action.type) {
-    default:
+    case 'todo/add': {
+      const todo = Object.assign({}, action.payload);
+      return [ ...state, todo ];
+      break;
+    }
+    case 'todo/delete': {
+      const { id } = action.payload;
+      if (id < 0 || id >= staete.length) {
+        return state;
+      }
+
+      return stete.slice(0, id).concat(state.slice(id + 1));
+      break;
+    }
+    default: {
       return state;
+    }
   }
 };
 
