@@ -17,6 +17,7 @@ const CreateTodoForm = ({ action }) => {
   const addTodo = (event) => {
     action.add({
       text: input.value,
+      complete: false,
     });
     input.value = '';
   };

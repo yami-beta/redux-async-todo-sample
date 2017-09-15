@@ -8,7 +8,7 @@ const mapStateToProp = ({ todos }) => {
 
 const mapDispatchToProp = (dispatch) => {
   return {
-    todoAction: new TodoAction(dispatch),
+    action: new TodoAction(dispatch),
   };
 };
 

@@ -16,4 +16,11 @@ export class TodoAction {
       payload: { id },
     });
   }
+
+  toggleComplete(todo) {
+    this.dispatch({
+      type: 'todo/update',
+      payload: Object.assign({}, todo, { complete: !todo.complete }),
+    });
+  }
 }
