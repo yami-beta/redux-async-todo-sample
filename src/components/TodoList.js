@@ -1,12 +1,22 @@
 import React from 'react';
 import Todo from './Todo';
 
-const TodoList = (props) => {
-  return (
-    <ul>
-      {props.todos.map((todo, i) => <Todo key={i} {...todo} id={i} action={props.action} />)}
-    </ul>
-  );
-};
+class TodoList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    this.props.action.get();
+  }
+
+  render() {
+    return (
+      <ul>
+        {this.props.todos.map((todo, i) => <Todo key={i} {...todo} id={i} action={this.props.action} />)}
+      </ul>
+    );
+  }
+}
 
 export default TodoList;

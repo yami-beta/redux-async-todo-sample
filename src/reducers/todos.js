@@ -1,9 +1,13 @@
-const initialState = [
-  { text: 'default todo 1', complete: false }
-];
+const initialState = [];
 
 const todos = (state = initialState, action) => {
   switch(action.type) {
+    case 'todo/get': {
+      if (action.meta.status === 'start') { return state; }
+      if (action.error) { return state; }
+      return action.payload;
+      break;
+    }
     case 'todo/add': {
       const todo = Object.assign({ complete: false, text: '' }, action.payload);
       return [ ...state, todo ];

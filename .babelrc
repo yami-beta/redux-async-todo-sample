@@ -8,6 +8,9 @@
     }],
     "react"
   ],
+  "plugins": [
+    "transform-runtime"
+  ],
   "env": {
     "development": {
       "plugins": ["react-hot-loader/babel"]
