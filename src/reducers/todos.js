@@ -15,7 +15,7 @@ const todos = (state = initialState, action) => {
         return state;
       }
 
-      return stete.slice(0, id).concat(state.slice(id + 1));
+      return state.slice(0, id).concat(state.slice(id + 1));
       break;
     }
     case 'todo/update': {
