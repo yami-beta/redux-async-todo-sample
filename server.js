@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 
 app.get('/todos/?(:id)?', (req, res) => {
   if (req.params.id) {
-    const todoIndex = data.todos.findIndex((element, index) => element.id === req.params.id);
+    const todoIndex = parseInt(req.params.id);
     if (todoIndex < 0) return res.status(404).json({});
     return res.status(200).json(data.todos[todoIndex]);
   }
@@ -52,7 +52,7 @@ app.put('/todos/?(:id)?', (req, res) => {
     todo,
     ...data.todos.slice(todoIndex + 1)
   ];
-  res.status(200).json(todo);
+  res.status(200).json(data.todos);
 });
 
 const server = app.listen(8081, () => {
