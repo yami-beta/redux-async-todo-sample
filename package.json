@@ -6,7 +6,7 @@
   "author": "yami_beta <yami-beta@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "watch:server": "nodemon --ignore src/ --ignore dist/ ./server.js",
+    "watch:server": "nodemon -w server.js server.js",
     "watch:js": "webpack-dev-server --hot",
     "watch": "npm-run-all -p watch:*"
   },
