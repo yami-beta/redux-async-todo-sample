@@ -26,7 +26,9 @@ app.use((req, res, next) => {
 app.get('/todos/?(:id)?', (req, res) => {
   if (req.params.id) {
     const todoIndex = parseInt(req.params.id);
-    if (todoIndex < 0) return res.status(404).json({});
+    if (todoIndex < 0 || data.todos.length - 1 < todoIndex) {
+      return res.status(404).json({});
+    }
     return res.status(200).json(data.todos[todoIndex]);
   }
   res.status(200).json(data.todos);
@@ -39,14 +41,26 @@ app.post('/todos/?', (req, res) => {
   res.status(201).json(data.todos);
 });
 
-app.put('/todos/?(:id)?', (req, res) => {
-  let id = req.params.id;
-  const todoIndex = data.todos.findIndex((element, index) => element.id === id);
-  if (todoIndex < 0) {
-    id = data.todos.length;
-  } 
-  
-  const todo = Object.assign({}, req.body, { id });
+app.delete('/todos/:id', (req, res) => {
+  const todoIndex = parseInt(req.params.id);
+  if (todoIndex < 0 || data.todos.length - 1 < todoIndex) {
+    return res.status(404).json({});
+  }
+
+  data.todos = [
+    ...data.todos.slice(0, todoIndex),
+    ...data.todos.slice(todoIndex + 1)
+  ];
+  res.status(200).json(data.todos);
+});
+
+app.put('/todos/:id', (req, res) => {
+  const todoIndex = parseInt(req.params.id);
+  if (todoIndex < 0 || data.todos.length - 1 < todoIndex) {
+    return res.status(404).json({});
+  }
+
+  const todo = Object.assign({}, data.todos[todoIndex], req.body);
   data.todos = [
     ...data.todos.slice(0, todoIndex),
     todo,

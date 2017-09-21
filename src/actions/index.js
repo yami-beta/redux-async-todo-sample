@@ -41,21 +41,52 @@ export class TodoAction extends ActionDispatcher {
       return this.failed({ type, payload: resJson });
     }
 
-    console.log(resJson);
     this.done({ type, payload: resJson });
   }
 
-  delete(id) {
-    this.dispatch({
-      type: 'todo/delete',
-      payload: { id },
+  async delete(id) {
+    const deleteUrl = `${url}/todos/${id}`;
+    const type = 'todo/delete';
+
+    this.start({ type });
+    const res = await fetch(deleteUrl, {
+      method: 'DELETE',
+      mode: 'CORS',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
     });
+
+    const resJson = await res.json();
+
+    if (!res.ok) {
+      return this.failed({ type, payload: resJson });
+    }
+
+    this.done({ type, payload: resJson });
   }
 
-  toggleComplete(todo) {
-    this.dispatch({
-      type: 'todo/update',
-      payload: Object.assign({}, todo, { complete: !todo.complete }),
+  async toggleComplete(todo) {
+    const putUrl = `${url}/todos/${todo.id}`;
+    const type = 'todo/update';
+
+    this.start({ type });
+    const res = await fetch(putUrl, {
+      method: 'PUT',
+      mode: 'CORS',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(Object.assign({}, todo, { complete: !todo.complete })),
     });
+
+    const resJson = await res.json();
+
+    if (!res.ok) {
+      return this.failed({ type, payload: resJson });
+    }
+
+    this.done({ type, payload: resJson });
   }
 }
