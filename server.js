@@ -11,6 +11,8 @@ const data = {
 const app = express();
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,HEAD,OPTIONS');
   next();
 });
 app.use(bodyParser.json());
@@ -32,9 +34,9 @@ app.get('/todos/?(:id)?', (req, res) => {
 
 app.post('/todos/?', (req, res) => {
   const id = data.todos.length;
-  const todo = Object.assign({}, req.body, { id });
+  const todo = Object.assign({}, req.body);
   data.todos.push(todo);
-  res.status(201).json(todo);
+  res.status(201).json(data.todos);
 });
 
 app.put('/todos/?(:id)?', (req, res) => {

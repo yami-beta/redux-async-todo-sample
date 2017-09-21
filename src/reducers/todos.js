@@ -1,16 +1,24 @@
-const initialState = [];
+const initialState = {
+  isFetching: false,
+  payload: [],
+};
 
 const todos = (state = initialState, action) => {
   switch(action.type) {
     case 'todo/get': {
-      if (action.meta.status === 'start') { return state; }
-      if (action.error) { return state; }
-      return action.payload;
+      if (action.meta.status === 'start') {
+        return { isFetching: true, payload: state.payload };
+      }
+      if (action.error) { return { isFetching: false, payload: state.payload }; }
+      return { isFetching: false, payload: action.payload };
       break;
     }
     case 'todo/add': {
-      const todo = Object.assign({ complete: false, text: '' }, action.payload);
-      return [ ...state, todo ];
+      if (action.meta.status === 'start') {
+        return { isFetching: true, payload: state.payload };
+      }
+      if (action.error) { return { isFetching: false, payload: state.payload }; }
+      return { isFetching: false, payload: action.payload };
       break;
     }
     case 'todo/delete': {

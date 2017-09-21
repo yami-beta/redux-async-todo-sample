@@ -13,7 +13,7 @@ class TodoList extends React.Component {
   render() {
     return (
       <ul>
-        {this.props.todos.map((todo, i) => <Todo key={i} {...todo} id={i} action={this.props.action} />)}
+        {this.props.todos.payload.map((todo, i) => <Todo key={i} {...todo} id={i} action={this.props.action} />)}
       </ul>
     );
   }

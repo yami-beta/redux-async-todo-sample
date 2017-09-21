@@ -21,11 +21,28 @@ export class TodoAction extends ActionDispatcher {
     this.done({ type, payload: resJson });
   }
 
-  add(todo) {
-    this.dispatch({
-      type: 'todo/add',
-      payload: todo,
+  async add(todo) {
+    const postUrl = `${url}/todos`;
+    const type = 'todo/add';
+
+    this.start({ type });
+    const res = await fetch(postUrl, {
+      method: 'POST',
+      mode: 'CORS',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todo)
     });
+
+    const resJson = await res.json();
+
+    if (!res.ok) {
+      return this.failed({ type, payload: resJson });
+    }
+
+    console.log(resJson);
+    this.done({ type, payload: resJson });
   }
 
   delete(id) {
