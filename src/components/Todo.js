@@ -17,7 +17,7 @@ const Todo = (props) => {
   };
 
   return (
-    <li>
+    <li className="todolist__item">
       <input id={`todo-${props.id}`} type="checkbox" checked={props.complete} onChange={onChange} />
       <label htmlFor={`todo-${props.id}`}>
         {props.text}

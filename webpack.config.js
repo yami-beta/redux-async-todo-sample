@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const glob = require('glob');
 const path = require('path');
 
@@ -23,7 +24,6 @@ if (process.env.NODE_ENV === 'production') {
   ];
 }
 
-
 module.exports = {
   entry: entry,
   output: {
@@ -37,8 +37,16 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loaders: ['babel-loader'],
+        use: ['babel-loader'],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1, modules: true } },
+          'postcss-loader',
+        ],
       }
     ],
   },
@@ -46,5 +54,6 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
+    watchContentBase: true,
   },
 };

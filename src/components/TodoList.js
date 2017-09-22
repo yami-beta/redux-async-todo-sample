@@ -1,5 +1,6 @@
 import React from 'react';
 import Todo from './Todo';
+import styles from './TodoList.css';
 
 class TodoList extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class TodoList extends React.Component {
 
   render() {
     return (
-      <ul>
+      <ul className={styles.todoList}>
         {this.props.todos.payload.map((todo, i) => <Todo key={i} {...todo} id={i} action={this.props.action} />)}
       </ul>
     );
