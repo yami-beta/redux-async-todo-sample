@@ -6,6 +6,7 @@
   "author": "yami_beta <yami-beta@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
+    "build:js": "NODE_ENV=production webpack",
     "watch:server": "nodemon -w server.js server.js",
     "watch:js": "webpack-dev-server --hot",
     "watch": "npm-run-all -p watch:*"
@@ -19,6 +20,7 @@
     "nodemon": "^1.12.1",
     "npm-run-all": "^4.1.1",
     "react-hot-loader": "next",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   },

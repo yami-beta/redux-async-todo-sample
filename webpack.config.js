@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const glob = require('glob');
 const path = require('path');
 
@@ -6,6 +7,22 @@ let entry = {};
 glob.sync('./src/index.js').forEach(function (file) {
   entry[path.basename(file, '.js')] = ['react-hot-loader/patch', file];
 });
+
+let plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  }),
+];
+
+if (process.env.NODE_ENV === 'production') {
+  plugins = [
+    ...plugins,
+    new UglifyJsPlugin({
+      sourceMap: true,
+    }),
+  ];
+}
+
 
 module.exports = {
   entry: entry,
@@ -25,14 +42,7 @@ module.exports = {
       }
     ],
   },
-  plugins: [
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false
-    //   },
-    //   sourceMap: true,
-    // }),
-  ],
+  plugins: plugins,
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
