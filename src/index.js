@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import App from './containers/App';
+import App from './components/App';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import todoAppReducers from './reducers';
@@ -23,7 +23,7 @@ const AppRender = () => {
 AppRender();
 
 if (module.hot) {
-  module.hot.accept('./containers/App', () => { AppRender() });
+  module.hot.accept('./components/App', () => { AppRender() });
   module.hot.accept('./reducers', () => {
     store.replaceReducer(todoAppReducers);
   });

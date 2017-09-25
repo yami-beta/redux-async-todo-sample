@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { TodoAction } from '../actions';
+import TodoForm from '../components/TodoForm';
 
 const mapStateToProp = () => {
   return {};
@@ -12,24 +13,5 @@ const mapDispatchToProp = (dispatch) => {
   };
 };
 
-const CreateTodoForm = ({ action }) => {
-  let input;
-  const addTodo = (event) => {
-    action.add({
-      text: input.value,
-      complete: false,
-    });
-    input.value = '';
-  };
-
-  return (
-    <div>
-      <input ref={(node) => { input = node; }} />
-      <button onClick={addTodo}>
-        Add Todo
-      </button>
-    </div>
-  );
-};
-const AddTodo = connect(mapStateToProp, mapDispatchToProp)(CreateTodoForm);
+const AddTodo = connect(mapStateToProp, mapDispatchToProp)(TodoForm);
 export default AddTodo;

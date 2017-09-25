@@ -1,0 +1,11 @@
+.app {
+  width: 100%;
+  max-width: 960px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  .app-inner {
+    width: 100%;
+  }
+}
