@@ -35,7 +35,7 @@ const Todo = (props) => {
       <label htmlFor={`todo-${props.id}`}>
         {props.text}
       </label>
-      <button className={`${styles['mdc-list-item__end-detail']}`} onClick={onClick}>x</button>
+      <button className={`${styles['mdc-list-item__end-detail']} ${styles['mdc-button']}`} onClick={onClick}>Delete</button>
     </li>
   );
 };
