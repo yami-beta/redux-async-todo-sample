@@ -1,3 +1,5 @@
+@import '../../node_modules/@material/list/dist/mdc.list.min.css';
+
 .todoList {
   list-style-type: none;
   padding: 0px;

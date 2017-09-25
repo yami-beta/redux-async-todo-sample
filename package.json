@@ -32,6 +32,8 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "@material/checkbox": "^0.4.7",
+    "@material/list": "^0.2.19",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "react": "^15.6.1",

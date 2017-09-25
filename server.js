@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use((req, res, next) => {
-  const delay = 1000;
+  const delay = 400;
   setTimeout(() => {
     next();
   }, delay);
